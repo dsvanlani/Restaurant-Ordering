@@ -1,0 +1,101 @@
+{% extends 'menu/layout.html' %}
+
+{% block title %}La Tavola - Order {% endblock %}
+{% block style %}
+    <style>
+        @media screen and (min-width: 767px) {
+              #mobile-navbar { display: none; }
+            }
+    </style>
+{% endblock %}
+{% block body %}
+
+{% load static %}
+<script src="{% static '/menu/order.js' %}"></script>
+
+<!-- Modals -->
+{% for item in items %}
+<div class="modal fade" id="add-item-{{ item.name | cut:' ' }}" tabindex="-1" role="dialog" aria-labelledby="{{ item.name | cut:' ' }}-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add {{ item.name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <form id="modal_form-{{ item.id }}">
+
+              <label for="special_request-{{ item.id }}">Special Instructions:</label><br>
+              <textarea id="special_request-{{ item.id }}" class="special_request" placeholder='e.g. "No onions"'></textarea>
+              <label for="quantity-{{item.id}}">Quantity</label>
+              <select id="quantity-{{item.id}}">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+            </select>
+          </form>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button class="btn btn-primary add-item-button" data-dismiss="modal" data-item_id="{{ item.id }}" data-item_name="{{ item.name }}" data-item_price="{{ item.price }}">Add Item</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<!-- Accordions -->
+    <div class="accordion" id="menuAccordion">
+    {% for category in categories %}
+        <div class="card">
+            <div class="card-header" id="{{ category | cut:' ' }}-heading">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#{{ category | cut:' ' }}-items" aria-expanded="false" aria-controls="{{ category | cut:' ' }}-items">
+                      {{ category.name }}
+                    </button>
+                </h2>
+            </div>
+            <div id="{{ category | cut:' ' }}-items" class="collapse" aria-labelledby="{{ category | cut:' ' }}-heading" data-parent="#menuAccordion">
+                <div class="card-body">
+                    {% for item in items %}
+
+                        <div class="menu-item">
+                        {% if item.category == category %}
+
+                            <span class="name"><strong>{{ item.name }}</strong></span> -
+                            <span class="price-box">$<span class="price">{{ item.price }}</span></span>
+
+                            <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#add-item-{{ item.name | cut:' ' }}">
+                              Add Item
+                            </button>
+
+                            <br>
+
+                            <p class="item_description">
+                              {{ item.description }}
+                            </p>
+                            <hr>
+                        {% endif %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+
+<!-- Sticky Bar -->
+
+<nav id="mobile-navbar" class="navbar-nav mr-auto fixed-bottom navbar-dark bg-dark">
+    <a class="nav-link btn btn-primary" href="{% url 'cart' %}">Review Order</a>
+</nav>
+{% endblock %}

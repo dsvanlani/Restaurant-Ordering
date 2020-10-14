@@ -1,0 +1,38 @@
+{% extends 'menu/layout.html' %}
+
+{% block title %}La Tavola - Home{% endblock %}
+
+{% block body %}
+{% load static %}
+
+<div class="row justify-content-center">
+  <img src="{% static 'images/navbar-logo.png' %}" id="main-logo">
+</div>
+
+<div class="row justify-content-center">
+  <img class="square-img rounded" src="{% static 'images/latav-square1.png' %}">
+  <img class="square-img rounded" src="{% static 'images/latav-square2.png' %}">
+  <img class="square-img rounded" src="{% static 'images/latav-square3.png' %}">
+  <img class="square-img rounded" src="{% static 'images/latav-square4.png' %}">
+</div>
+
+    <div class="row">
+      <div class="col mx-auto">
+        <div class="text-center">
+          <h1 style="color: white;"><u>Homemade Italian in Grandview</u></h1>
+
+        </div>
+      </div>
+    </div>
+<div class="row justify-content-center">
+          <p class="home-p text-center" style="color: white;">
+            Our mission is to bring extraordinary flavors and ingredients to
+          our community.  We continue to keep the art of handmade pasta alive
+          and well and as such share our passion with our customers.  Featuring
+          an all Italian wine list as well as artisan pizzas, entrees, appetizers,
+          and desserts there is truly something for everyone.</p>
+</div>
+<div class="row justify-content-center">
+  <a href="{% url 'order' %}" class="btn btn-primary" id="home-order-button">Order Now</a>
+</div>
+{% endblock %}

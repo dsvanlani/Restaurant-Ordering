@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>La Tavola - Manage Orders</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+
+{% load static %}
+{% load tz %}
+<script src="{% static '/menu/manage_orders.js' %}"></script>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <button class="nav-link active btn btn-link" id="ticket-view-button">Tickets</button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link btn btn-link" id="order-view-button">Orders</button>
+  </li>
+</ul>
+
+
+<!-- Order Cards... "tickets" -->
+<div id="ticket_view")>
+    <div class="row">
+        {% if orders %}
+        {% for order in orders %}
+        <div class="card ticket" id="order-{{order.id}}" data-timestamp="{{ order.timestamp }}">
+          <div class="card-body">
+            <h5 class="card-title">
+                <span class="minute_ticker"></span> min
+            </h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ order.customer_Name}}</h6>
+              {% for item_instance in item_instances %}
+            <ul class="list-group">
+                {% if item_instance.order == order %}
+              <li class="list-group-item">
+                  {{ item_instance.item.name }}<br>
+                  <small>{{ item_instance.special_request }}</small>
+              </li>
+                {% endif %}
+            </ul>
+              {% endfor %}
+          </div>
+            <button class="card-link btn btn-primary complete_order_button" data-order_id="{{order.id}}">Complete Order</button>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h2><center>No Orders</center></h2>
+        {% endif %}
+    </div>
+</div>
+    <!-- END Order Cards "tickets"  -->
+
+<!-- Bootstrap JS --->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+
+<div id="order_view">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Order Name</th>
+                    <th>Number of items</th>
+                    <th>Total</th>
+                    <th>Tax</th>
+                    <th>Grand Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            {% for order in orders %}
+            <tr id="order-row-{{ order.id }}">
+                <td>{{ order.customer_Name }}</td>
+                <td>{{ order.number_of_items }}</td>
+                <td class="total">{{ order.total }}</td>
+                <td class="tax">{{ order.tax }}</td>
+                <td><span class= "grand_total" data-order_id="{{order.id}}"></span></td>
+                <td><button class="card-link btn btn-primary complete_order_button" data-order_id="{{order.id}}">Complete Order</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
+
+</html>

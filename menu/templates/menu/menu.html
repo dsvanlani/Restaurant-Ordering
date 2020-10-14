@@ -1,0 +1,20 @@
+{% extends 'menu/layout.html' %}
+
+{% block title %}La Tavola - Menu{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+    {% for category in categories %}
+        <div class="col-lg-6 col-m">
+            <h3>{{ category.name }}</h3><br>
+                {% for item in items %}
+                    {% if item.category == category %}
+                        {{ item }}<br>
+                    {% endif %}
+                {% endfor %}
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,91 @@
+.price {
+  margin: 4px;
+}
+
+li {
+  margin: 4px;
+}
+
+input, #place_order_button {
+  margin: 4px;
+  width: 200px;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: grey;
+}
+
+body {
+  background-image: url("/static/images/moroccan-flower-dark.png");
+  padding-top: 75px;
+}
+
+.accordion {
+  margin: 20px;
+  margin-bottom: 50px;
+}
+
+#cart_list_view {
+  background-color: white;
+  margin-top: 35px;
+  padding: 10px;
+  opacity: 0.85;
+}
+
+#confirmation_view {
+  background-color: white;
+  display: block;
+  margin-top: 35px;
+  padding: 10px;
+  opacity: 0.85;
+  display: none;
+}
+
+.special_request {
+  width: 100%;
+}
+
+.modal-body label {
+  margin: 3px;
+}
+
+table {
+  width: 100%;
+}
+
+#main-logo {
+  width: 35%;
+  margin: 25px;
+}
+
+.square-img {
+  height: 200px;
+  margin: 15px;
+}
+
+.white-bg {
+  background-color: white;
+  opacity: 80%;
+  margin: 30px;
+  width: 60%;
+}
+
+h1 {
+  margin: 20px;
+}
+
+.home-p {
+  width: 50%;
+  text-align: center;
+}
+
+#home-order-button {
+  margin: 30px;
+  width: 50%;
+}
+
+/*# sourceMappingURL=style.css.map */

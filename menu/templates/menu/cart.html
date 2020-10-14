@@ -1,0 +1,58 @@
+{% extends 'menu/layout.html' %}
+{% block title %}La Tavola - Cart{% endblock %}
+{% block body %}
+{% load static %}
+<script src="{% static '/menu/cart.js' %}"></script>
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkout-modal" tabindex="-1" role="dialog" aria-labelledby="checkout-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">A few more things..</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <div class="modal-body">
+             <p><form>
+                <label for="name_field">Name for your Order?</label><br>
+                <input type="text" placeholder="e.g. Duane" required id="name_field"><br>
+                <label for="email_field">Email Address</label><br>
+                <input type="email" placeholder="Email" required id="email_field"><br>
+            </form></p>
+        </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="place_order_button" data-dismiss="modal">Place Your Order</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END -->
+<!-- Cart List Container -->
+<div class="container rounded" id="cart_list_view">
+    <h1>Cart</h1>
+    <ul id="cart_list" class="list-group list-group-flush">
+
+    </ul>
+    <hr>
+    <p>Total: $<span id="total"></span></p>
+    <p>Tax: $<span id="tax"></span></p>
+    <p>Grand Total: $<span id="grand_total"></span></p>
+    <a href="/order" class="btn btn-secondary">Add More Items</a>
+    <button id="continue_button" type="button" class="btn btn-primary" data-toggle="modal" data-target="#checkout-modal">
+                              Continue
+    </button>
+</div>
+<!-- END --->
+<!-- the Confirmation view -->
+<div class="container rounded" id="confirmation_view">
+    <h3>Your order been placed.</h3>
+    <p>Thank you <span id="customer_Name"></span>.  Your order will be ready to pickup at
+    <span id="pickup_time"></span>.
+    </p>
+    <p>If you have any concerns or need to cancel your order please call 555.555.5555</p>
+
+</div>
+{% endblock %}
